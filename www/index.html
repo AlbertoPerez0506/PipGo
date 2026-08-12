@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#1F6B4F">
+    <title>PIPGO — Productos locales cerca de ti</title>
+    
+    <!-- Fuente Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- DRAWER LATERAL (Menú desplegable)            -->
+    <!-- ============================================ -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    
+    <aside class="drawer" id="drawerMenu" role="navigation" aria-label="Menú principal">
+        <div class="drawer-header">
+            <span class="drawer-logo">PipGo</span>
+            <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="drawer-nav">
+            <div class="drawer-section">
+                <a href="#" class="drawer-item active" data-screen="home">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 8L10 2L17 8V17C17 17.5523 16.5523 18 16 18H4C3.44772 18 3 17.5523 3 17V8Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 18V11H12V18" stroke="currentColor" stroke-width="1.8"/></svg>
+                    <span>Inicio</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="explore">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M14 14L19 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <span>Explorar</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="categories">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+                    <span>Categorías</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="map">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5L7 3L13 5L18 3V16L13 18L7 16L2 18V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 3V16M13 5V18" stroke="currentColor" stroke-width="1.8"/></svg>
+                    <span>Mapa</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="favorites">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17L3.5 11.5C2.5 10.6 2 9.3 2 8C2 5.8 3.8 4 6 4C7.2 4 8.4 4.6 10 5.8C11.6 4.6 12.8 4 14 4C16.2 4 18 5.8 18 8C18 9.3 17.5 10.6 16.5 11.5L10 17Z" stroke="currentColor" stroke-width="1.8"/></svg>
+                    <span>Favoritos</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="my-posts">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <span>Mis publicaciones</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="messages">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 5C2 3.9 2.9 3 4 3H16C17.1 3 18 3.9 18 5V13C18 14.1 17.1 15 16 15H8L4 18V15H4C2.9 15 2 14.1 2 13V5Z" stroke="currentColor" stroke-width="1.8"/></svg>
+                    <span>Mensajes</span>
+                </a>
+            </div>
+            
+            <div class="drawer-divider"></div>
+            
+            <div class="drawer-section">
+                <a href="#" class="drawer-item highlight" data-screen="sell">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.8"/><path d="M10 6V14M6 10H14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <span>Vender en PipGo</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="profile">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M2 18C2 14.7 5.6 12 10 12C14.4 12 18 14.7 18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <span>Mi perfil</span>
+                </a>
+                <a href="#" class="drawer-item" data-screen="settings">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M2 10H4M16 10H18M4.5 4.5L6 6M14 14L15.5 15.5M15.5 4.5L14 6M6 14L4.5 15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <span>Configuración</span>
+                </a>
+            </div>
+            
+            <div class="drawer-divider"></div>
+            
+            <div class="drawer-section">
+                <a href="#" class="drawer-item logout" data-screen="logout">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10H11M8 7L11 10L8 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 3H4C2.9 3 2 3.9 2 5V17C2 18.1 2.9 19 4 19H5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- ============================================ -->
+    <!-- PANTALLA: HOME                               -->
+    <!-- ============================================ -->
+    <main class="screen active" id="screen-home">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="icon-btn" id="menuBtn" aria-label="Abrir menú">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M3 5.5H19M3 11H19M3 16.5H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="header-center">
+                <span class="logo">PipGo</span>
+            </div>
+            <div class="header-right">
+                <button class="avatar-btn" id="avatarBtn" aria-label="Perfil">
+                    <span class="avatar-initials">IP</span>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Contenido Home -->
+        <div class="screen-content">
+            
+            <!-- Ubicación -->
+            <button class="location-selector" id="locationSelector">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1.5C5.2 1.5 3 3.7 3 6.5C3 10 8 14.5 8 14.5C8 14.5 13 10 13 6.5C13 3.7 10.8 1.5 8 1.5Z" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="8" cy="6.5" r="2" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span>Emiliano Zapata, Tabasco</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="chevron">
+                    <path d="M4 5.5L7 8.5L10 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <!-- Barra de búsqueda -->
+            <div class="search-bar" id="searchBar" role="button" tabindex="0">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="search-icon">
+                    <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <span class="search-placeholder">¿Qué estás buscando?</span>
+            </div>
+            
+            <!-- Categorías -->
+            <div class="categories-wrapper" id="categoriesScroll">
+                <div class="categories-row">
+                    <button class="category-item active">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #FFF3E0, #FFE0B2);">
+                            <span>🍉</span>
+                        </div>
+                        <span class="category-label">Todo</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #FFE8E0, #FFD4C4);">
+                            <span>🍅</span>
+                        </div>
+                        <span class="category-label">Frutas</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #E8F5E9, #C8E6C9);">
+                            <span>🥬</span>
+                        </div>
+                        <span class="category-label">Verduras</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #FFF8E1, #FFECB3);">
+                            <span>🌽</span>
+                        </div>
+                        <span class="category-label">Granos</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #FFFDE7, #FFF9C4);">
+                            <span>🍯</span>
+                        </div>
+                        <span class="category-label">Miel</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #F3E5F5, #E1BEE7);">
+                            <span>🥛</span>
+                        </div>
+                        <span class="category-label">Lácteos</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #FFFDE7, #FFF9C4);">
+                            <span>🥚</span>
+                        </div>
+                        <span class="category-label">Huevos</span>
+                    </button>
+                    <button class="category-item">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #E8EAF6, #C5CAE9);">
+                            <span>🏺</span>
+                        </div>
+                        <span class="category-label">Artesanías</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hero banner -->
+            <div class="hero-banner" id="heroBanner">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h2 class="hero-title">Productos frescos,<br>cerca de ti.</h2>
+                    <p class="hero-subtitle">Descubre lo que venden tus vecinos hoy</p>
+                    <button class="hero-cta" id="heroCta">
+                        Explorar ahora
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="hero-illustration">
+                    <span class="hero-emoji hero-emoji-1">🥑</span>
+                    <span class="hero-emoji hero-emoji-2">🍅</span>
+                    <span class="hero-emoji hero-emoji-3">🌽</span>
+                    <span class="hero-emoji hero-emoji-4">🍯</span>
+                </div>
+            </div>
+            
+            <!-- Sección: Descubre cerca de ti -->
+            <div class="section-header">
+                <h3 class="section-title">Descubre cerca de ti</h3>
+                <button class="section-link">Ver todo</button>
+            </div>
+            
+            <!-- Grid de productos -->
+            <div class="product-grid" id="productGrid">
+                
+                <!-- Producto 1 -->
+                <article class="product-card" data-product-id="1">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FF6B6B, #E63946);">
+                        <span class="product-emoji">🍅</span>
+                        <button class="favorite-btn" data-favorite="1" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Tomate criollo</h4>
+                        <span class="product-price">$35 <em>/ kg</em></span>
+                        <span class="product-meta">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                            0.8 km · Rancho El Paraíso
+                        </span>
+                    </div>
+                </article>
+                
+                <!-- Producto 2 -->
+                <article class="product-card" data-product-id="2">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FFB347, #F59E00);">
+                        <span class="product-emoji">🥭</span>
+                        <button class="favorite-btn" data-favorite="2" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Mango ataulfo</h4>
+                        <span class="product-price">$40 <em>/ kg</em></span>
+                        <span class="product-meta">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                            1.2 km · Huerto Don Manuel
+                        </span>
+                    </div>
+                </article>
+                
+                <!-- Producto 3 -->
+                <article class="product-card" data-product-id="3">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FFF5E1, #F5E6CA);">
+                        <span class="product-emoji">🥚</span>
+                        <button class="favorite-btn" data-favorite="3" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Huevo criollo</h4>
+                        <span class="product-price">$60 <em>/ docena</em></span>
+                        <span class="product-meta">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                            0.5 km · Granja La Esperanza
+                        </span>
+                    </div>
+                </article>
+                
+                <!-- Producto 4 -->
+                <article class="product-card" data-product-id="4">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FFC107, #FFA000);">
+                        <span class="product-emoji">🍯</span>
+                        <button class="favorite-btn" data-favorite="4" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Miel orgánica</h4>
+                        <span class="product-price">$90 <em>/ 500 ml</em></span>
+                        <span class="product-meta">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                            2.5 km · Apiario San Juan
+                        </span>
+                    </div>
+                </article>
+                
+                <!-- Producto 5 -->
+                <article class="product-card" data-product-id="5">
+                    <div class="product-image" style="background: linear-gradient(145deg, #4CAF50, #2E7D32);">
+                        <span class="product-emoji">🥑</span>
+                        <button class="favorite-btn" data-favorite="5" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Aguacate criollo</h4>
+                        <span class="product-price">$45 <em>/ kg</em></span>
+                        <span class="product-meta">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                            1.8 km · Rancho El Paraíso
+                        </span>
+                    </div>
+                </article>
+                
+                <!-- Producto 6 -->
+                <article class="product-card" data-product-id="6">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FFF9E6, #F5F0DC);">
+                        <span class="product-emoji">🧀</span>
+                        <button class="favorite-btn" data-favorite="6" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Queso fresco</h4>
+                        <span class="product-price">$50 <em>/ 400 g</em></span>
+                        <span class="product-meta">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                            0.9 km · Quesería La Sierra
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- PANTALLA: DETALLE DE PRODUCTO                -->
+    <!-- ============================================ -->
+    <section class="screen secondary-screen" id="screen-product-detail">
+        <div class="detail-image" id="detailImage">
+            <span class="detail-emoji" id="detailEmoji">🍅</span>
+            <div class="detail-top-bar">
+                <button class="detail-btn back-btn" id="detailBackBtn" aria-label="Regresar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 10H5M9 6L5 10L9 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <button class="detail-btn detail-fav-btn" id="detailFavBtn" aria-label="Añadir a favoritos">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M9 15.5L4.5 11.3C3.6 10.4 3.1 9.3 3.1 8C3.1 5.9 4.7 4.3 6.8 4.3C7.8 4.3 8.8 4.8 9.5 5.7C10.2 4.8 11.2 4.3 12.2 4.3C14.3 4.3 15.9 5.9 15.9 8C15.9 9.3 15.4 10.4 14.5 11.3L9 15.5Z" stroke="currentColor" stroke-width="1.6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="detail-content">
+            <h1 class="detail-name" id="detailName">Tomate criollo</h1>
+            
+            <div class="detail-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-value">4.8</span>
+                <span class="rating-count">(24 reseñas)</span>
+            </div>
+            
+            <div class="detail-price-row">
+                <span class="detail-price" id="detailPrice">$35</span>
+                <span class="detail-unit" id="detailUnit">/ kg</span>
+            </div>
+            
+            <p class="detail-description" id="detailDescription">
+                Tomate criollo fresco, cultivado sin químicos en Rancho El Paraíso. Cosechado esta mañana. Ideal para salsas y guisos. Sabor auténtico de huerto.
+            </p>
+            
+            <!-- Información del productor -->
+            <div class="producer-card" id="producerCard" role="button" tabindex="0">
+                <div class="producer-avatar" id="detailProducerAvatar" style="background: linear-gradient(135deg, #4F9D69, #1F6B4F);">
+                    <span>RP</span>
+                </div>
+                <div class="producer-info">
+                    <span class="producer-name" id="detailProducerName">Rancho El Paraíso</span>
+                    <span class="producer-meta">
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C2.8 1 1 2.8 1 5C1 7.2 2.8 9 5 9C7.2 9 9 7.2 9 5C9 2.8 7.2 1 5 1Z" stroke="currentColor" stroke-width="1.2"/><circle cx="5" cy="5" r="1.2" fill="currentColor"/></svg>
+                        0.8 km · Emiliano Zapata
+                    </span>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="producer-chevron">
+                    <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            
+            <!-- CTA -->
+            <button class="cta-btn" id="contactCta">
+                Contactar productor
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PANTALLA: PERFIL DE PRODUCTOR                -->
+    <!-- ============================================ -->
+    <section class="screen secondary-screen" id="screen-producer">
+        <div class="producer-hero" style="background: linear-gradient(160deg, #4F9D69, #1F6B4F);">
+            <button class="detail-btn back-btn" id="producerBackBtn" aria-label="Regresar">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 10H5M9 6L5 10L9 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="producer-profile-body">
+            <div class="producer-profile-avatar">
+                <span>RP</span>
+            </div>
+            
+            <h2 class="producer-profile-name">Rancho El Paraíso</h2>
+            
+            <div class="producer-profile-rating">
+                <span class="stars">★★★★★</span>
+                <span>4.9 · 32 reseñas</span>
+            </div>
+            
+            <div class="producer-profile-meta">
+                <span>📍 Emiliano Zapata, Tabasco</span>
+                <span>·</span>
+                <span>12 productos activos</span>
+            </div>
+            
+            <p class="producer-profile-bio">
+                Somos un rancho familiar dedicado al cultivo de tomate, aguacate y verduras de temporada. Sin pesticidas, con prácticas sustentables. Entrega directa del huerto a tu mesa.
+            </p>
+            
+            <div class="section-header">
+                <h3 class="section-title">Productos disponibles</h3>
+            </div>
+            
+            <div class="product-grid producer-grid">
+                <!-- Mismo estilo de cards que en Home -->
+                <article class="product-card" data-product-id="1">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FF6B6B, #E63946);">
+                        <span class="product-emoji">🍅</span>
+                        <button class="favorite-btn" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Tomate criollo</h4>
+                        <span class="product-price">$35 <em>/ kg</em></span>
+                        <span class="product-meta">📍 0.8 km</span>
+                    </div>
+                </article>
+                
+                <article class="product-card" data-product-id="5">
+                    <div class="product-image" style="background: linear-gradient(145deg, #4CAF50, #2E7D32);">
+                        <span class="product-emoji">🥑</span>
+                        <button class="favorite-btn" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Aguacate criollo</h4>
+                        <span class="product-price">$45 <em>/ kg</em></span>
+                        <span class="product-meta">📍 1.8 km</span>
+                    </div>
+                </article>
+                
+                <article class="product-card" data-product-id="7">
+                    <div class="product-image" style="background: linear-gradient(145deg, #8BC34A, #558B2F);">
+                        <span class="product-emoji">🥬</span>
+                        <button class="favorite-btn" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Lechuga fresca</h4>
+                        <span class="product-price">$25 <em>/ pieza</em></span>
+                        <span class="product-meta">📍 0.8 km</span>
+                    </div>
+                </article>
+                
+                <article class="product-card" data-product-id="8">
+                    <div class="product-image" style="background: linear-gradient(145deg, #FF9800, #E65100);">
+                        <span class="product-emoji">🥕</span>
+                        <button class="favorite-btn" aria-label="Añadir a favoritos">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 13.5L3.5 9.6C2.7 8.9 2.3 7.9 2.3 6.8C2.3 5 3.7 3.6 5.5 3.6C6.4 3.6 7.3 4 8 4.8C8.7 4 9.6 3.6 10.5 3.6C12.3 3.6 13.7 5 13.7 6.8C13.7 7.9 13.3 8.9 12.5 9.6L8 13.5Z" stroke="currentColor" stroke-width="1.3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-name">Zanahoria criolla</h4>
+                        <span class="product-price">$28 <em>/ kg</em></span>
+                        <span class="product-meta">📍 0.8 km</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PANTALLA: MAPA                              -->
+    <!-- ============================================ -->
+    <section class="screen secondary-screen" id="screen-map">
+        <!-- Mapa estilizado -->
+        <div class="map-container" id="mapContainer">
+            <!-- Calles de fondo -->
+            <div class="map-street map-street-h1"></div>
+            <div class="map-street map-street-h2"></div>
+            <div class="map-street map-street-h3"></div>
+            <div class="map-street map-street-v1"></div>
+            <div class="map-street map-street-v2"></div>
+            <div class="map-street map-street-v3"></div>
+            
+            <!-- Bloques -->
+            <div class="map-block block-1"></div>
+            <div class="map-block block-2"></div>
+            <div class="map-block block-3"></div>
+            <div class="map-block block-4"></div>
+            <div class="map-block block-5"></div>
+            <div class="map-block block-6"></div>
+            
+            <!-- Marcador usuario -->
+            <div class="map-marker user-marker">
+                <div class="marker-pulse"></div>
+                <div class="marker-dot"></div>
+                <span class="marker-label">Tú</span>
+            </div>
+            
+            <!-- Marcadores de productos -->
+            <button class="map-marker product-marker" style="top: 20%; left: 30%;" data-marker="1">
+                <span class="marker-emoji">🍅</span>
+                <span class="marker-label">$35</span>
+            </button>
+            <button class="map-marker product-marker" style="top: 45%; left: 55%;" data-marker="2">
+                <span class="marker-emoji">🥭</span>
+                <span class="marker-label">$40</span>
+            </button>
+            <button class="map-marker product-marker" style="top: 65%; left: 20%;" data-marker="3">
+                <span class="marker-emoji">🥚</span>
+                <span class="marker-label">$60</span>
+            </button>
+            <button class="map-marker product-marker" style="top: 30%; left: 70%;" data-marker="4">
+                <span class="marker-emoji">🍯</span>
+                <span class="marker-label">$90</span>
+            </button>
+            <button class="map-marker product-marker" style="top: 75%; left: 50%;" data-marker="5">
+                <span class="marker-emoji">🥑</span>
+                <span class="marker-label">$45</span>
+            </button>
+            <button class="map-marker product-marker" style="top: 15%; left: 85%;" data-marker="6">
+                <span class="marker-emoji">🧀</span>
+                <span class="marker-label">$50</span>
+            </button>
+            
+            <!-- Botón regresar -->
+            <button class="detail-btn back-btn map-back-btn" id="mapBackBtn" aria-label="Regresar">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 10H5M9 6L5 10L9 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            
+            <!-- Tarjeta contextual -->
+            <div class="map-context-card" id="mapContextCard">
+                <div class="context-image" style="background: linear-gradient(145deg, #FF6B6B, #E63946);">
+                    <span>🍅</span>
+                </div>
+                <div class="context-info">
+                    <h4>Tomate criollo</h4>
+                    <span class="context-price">$35 / kg</span>
+                    <span class="context-meta">📍 0.8 km · Rancho El Paraíso</span>
+                </div>
+                <button class="context-btn" aria-label="Ver detalle">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- OVERLAY DE BÚSQUEDA                          -->
+    <!-- ============================================ -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-overlay-header">
+            <div class="search-overlay-input">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                <input type="text" placeholder="¿Qué estás buscando?" id="searchInput" autocomplete="off">
+            </div>
+            <button class="search-cancel" id="searchCancel">Cancelar</button>
+        </div>
+        
+        <div class="search-suggestions" id="searchSuggestions">
+            <span class="search-suggestion-label">Búsquedas populares</span>
+            <button class="search-chip">Tomate 🍅</button>
+            <button class="search-chip">Mango 🥭</button>
+            <button class="search-chip">Miel 🍯</button>
+            <button class="search-chip">Aguacate 🥑</button>
+            <button class="search-chip">Huevo 🥚</button>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TOAST (notificación efímera)                 -->
+    <!-- ============================================ -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">¡Agregado a favoritos!</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/index.js"></script>
+</body>
+</html>
